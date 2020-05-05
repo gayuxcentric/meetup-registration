@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html
+  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Java Meetup Registration</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+          crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:include="common/header"></div>
+<div th:if="${success}">
+  <div class="alert alert-success">User Registration Successful</div>
+</div>
+<h4 style="color:#069">List of Registered Users</h4>
+<br>
+<br>
+<table class="table table-striped">
+  <thead class="thead-light">
+  <tr>
+    <th scope="col">Id</th>
+    <th scope="col">Name</th>
+    <th scope="col">Address</th>
+    <th scope="col">City</th>
+    <th scope="col">Country</th>
+    <th scope="col">Phone Number</th>
+    <th scope="col">Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${registeredUsers}">
+    <td th:text="${user.id}"></td>
+    <td th:text="${user.name}"></td>
+    <td th:text="${user.address}"></td>
+    <td th:text="${user.city}"></td>
+    <td th:text="${user.country}"></td>
+    <td th:text="${user.phone}"></td>
+    <td th:text="${user.email}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+
+</html>

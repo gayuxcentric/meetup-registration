@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html
+  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Java Meetup Registration</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+          crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}">
+</head>
+<body>
+
+<div th:include="common/header"></div>
+
+<div class="container">
+  <br>
+  <div th:if="${userExists}">
+    <div class="alert alert-danger">User has been already registered</div>
+  </div>
+  <div th:if="${passwordMismatch}">
+    <div class="alert alert-warning">Passwords are not matching</div>
+  </div>
+  <br>
+  <h2 style="color:#069">Java Meetup registration</h2>
+  <form method="POST" th:object="${user}" action="/save/registration">
+    <div class="mb-3">
+      <label for="name">Name</label>
+      <input type="text" class="form-control"
+             th:classappend="${#fields.hasErrors('name')}? 'is-invalid':''"
+             id="name" name="name" placeholder="Name" th:field="*{name}">
+      <div class="invalid-feedback">
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Validation error</span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="name">Password</label>
+      <input type="password" class="form-control"
+             th:classappend="${#fields.hasErrors('password')}? 'is-invalid':''"
+             id="password" name="password" placeholder="Password" th:field="*{password}">
+      <div class="invalid-feedback">
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Validation error</span>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" class="form-control"
+             th:classappend="${#fields.hasErrors('confirmPassword')}? 'is-invalid':''"
+             id="confirmPassword" name="password" placeholder="Confirm Password" th:field="*{confirmPassword}">
+      <div class="invalid-feedback">
+        <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">passwords are not identical</span>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="name">Email</label>
+      <input type="email" class="form-control"
+             th:classappend="${#fields.hasErrors('email')}? 'is-invalid':''"
+             id="email" name="email" placeholder="Email" th:field="*{email}">
+      <div class="invalid-feedback">
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Validation error</span>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="name">Address</label>
+      <input type="text" class="form-control"
+             th:classappend="${#fields.hasErrors('address')}? 'is-invalid':''"
+             id="address" name="address" placeholder="Street Name, House Number" th:field="*{address}">
+      <div class="invalid-feedback">
+        <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Validation error</span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="city">City</label>
+      <input type="text" class="form-control" id="city" name="city" placeholder="City">
+    </div>
+    <div class="mb-3">
+      <label for="country">Country</label>
+      <input id="country" class="form-control" type="text" name="country" placeholder="Country">
+    </div>
+    <div class="mb-3">
+      <label for="name">Phone</label>
+      <input type="text" class="form-control"
+             th:classappend="${#fields.hasErrors('phone')}? 'is-invalid':''"
+             id="phone" name="phone" placeholder="Phone" th:field="*{phone}">
+      <div class="invalid-feedback">
+        <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Validation error</span>
+      </div>
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="check" required="required">
+      <label class="form-check-label" for="check">I Agree to the terms & conditions of K15t</label>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-info">Register</button>
+  </form>
+</div>
+<div th:include="common/footer"></div>
+</body>
+</html>
